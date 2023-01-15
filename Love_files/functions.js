@@ -37,24 +37,48 @@ $(window).resize(function() {
 	};
 })(jQuery);
 
+// function timeElapse(date){
+// 	var current = Date();
+// 	var seconds = (Date.parse(current) - Date.parse(date)) / 1000;
+// 	var days = Math.floor(seconds / (3600 * 24));
+// 	seconds = seconds % (3600 * 24);
+// 	var hours = Math.floor(seconds / 3600);
+// 	if (hours < 10) {
+// 		hours = "0" + hours;
+// 	}
+// 	seconds = seconds % 3600;
+// 	var minutes = Math.floor(seconds / 60);
+// 	if (minutes < 10) {
+// 		minutes = "0" + minutes;
+// 	}
+// 	seconds = seconds % 60;
+// 	if (seconds < 10) {
+// 		seconds = "0" + seconds;
+// 	}
+// 	var result = "第 <span class=\"digit\">" + days + "</span> 天 <span class=\"digit\">" + hours + "</span> 小时 <span class=\"digit\">" + minutes + "</span> 分钟 <span class=\"digit\">" + seconds + "</span> 秒"; 
+// 	$("#clock").html(result);
+// }
+
+
 function timeElapse(date){
 	var current = Date();
-	var seconds = (Date.parse(current) - Date.parse(date)) / 1000;
-	var days = Math.floor(seconds / (3600 * 24));
-	seconds = seconds % (3600 * 24);
-	var hours = Math.floor(seconds / 3600);
-	if (hours < 10) {
-		hours = "0" + hours;
-	}
-	seconds = seconds % 3600;
-	var minutes = Math.floor(seconds / 60);
-	if (minutes < 10) {
-		minutes = "0" + minutes;
-	}
-	seconds = seconds % 60;
-	if (seconds < 10) {
-		seconds = "0" + seconds;
-	}
+	// get total seconds between the times
+	var delta = Math.abs(new Date() - date) / 1000;
+
+	// calculate (and subtract) whole days
+	var days = Math.floor(delta / 86400);
+	delta -= days * 86400;
+
+	// calculate (and subtract) whole hours
+	var hours = Math.floor(delta / 3600) % 24;
+	delta -= hours * 3600;
+
+	// calculate (and subtract) whole minutes
+	var minutes = Math.floor(delta / 60) % 60;
+	
+	// what's left is seconds
+	var seconds = Math.floor(delta % 60);  // in theory the modulus is not required
+
 	var result = "第 <span class=\"digit\">" + days + "</span> 天 <span class=\"digit\">" + hours + "</span> 小时 <span class=\"digit\">" + minutes + "</span> 分钟 <span class=\"digit\">" + seconds + "</span> 秒"; 
 	$("#clock").html(result);
 }
