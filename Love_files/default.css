@@ -19,10 +19,12 @@ a {color:#000;font-size:14px;}
 .image{
     background:url(../image.png) 0 0 no-repeat;
     display:block;
-    height:110%; /* your image height */
+    height:120%; /* your image height */ 
     text-indent:-99999em;
     width:105%; /* your image width */
     overflow:hidden;
     background-size: cover;
-    
+    border-radius: 5%;
+    bottom: 10%;
+    position: relative;
 }
